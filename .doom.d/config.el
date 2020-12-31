@@ -53,10 +53,19 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+
+
+;;
+;; focusing maps
+;;
+
 (map! :leader
     (:prefix ("w" . "extend")
       :desc "focus-up"
       "<up>" #'evil-window-up))
+
+(map! :leader
+      :desc "focus-up" "<up>" #'evil-window-up)
 
 (map! :leader
     (:prefix ("w" . "extend")
@@ -64,14 +73,24 @@
       "<down>" #'evil-window-down))
 
 (map! :leader
+      :desc "focus-down" "<down>" #'evil-window-down)
+
+(map! :leader
     (:prefix ("w" . "extend")
       :desc "focus-left"
       "<left>" #'evil-window-left))
 
 (map! :leader
+      :desc "focus-left" "<left>" #'evil-window-left)
+
+(map! :leader
     (:prefix ("w" . "extend")
       :desc "focus-right"
       "<right>" #'evil-window-right))
+
+(map! :leader
+      :desc "focus-right" "<right>" #'evil-window-right)
+
 
 
 (defun my-vsplit ()
@@ -83,6 +102,11 @@
 	;;)
 )
 
+
+;;
+;; split maps
+;;
+
 (map! :leader
     (:prefix ("w" . "extend")
       :desc "split to bottom"
@@ -93,7 +117,21 @@
       :desc "split to right"
       "%" #'evil-window-vsplit))
 
+(map! :leader
+      :desc "split-below" "'" #'evil-window-split)
+(map! :leader
+      :desc "split-below" "\"" #'evil-window-split)
 
+(map! :leader
+      :desc "split-right" "5" #'evil-window-vsplit)
+(map! :leader
+      :desc "split-right" "%" #'evil-window-vsplit)
+
+
+
+;;
+;; resize maps
+;;
 
 (map! :leader
     (:prefix ("w" . "extend")
@@ -115,25 +153,15 @@
       :desc "decrease-height"
       "," #'evil-window-decrease-width))
 
+(global-set-key (kbd "<M-up>") 'shrink-window)
+(global-set-key (kbd "<M-down>") 'enlarge-window)
+(global-set-key (kbd "<M-left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<M-right>") 'enlarge-window-horizontally)
 
-(global-set-key (kbd "<M-S-up>") 'shrink-window)
-(global-set-key (kbd "<M-S-down>") 'enlarge-window)
-(global-set-key (kbd "<M-S-left>") 'shrink-window-horizontally)
-(global-set-key (kbd "<M-S-right>") 'enlarge-window-horizontally)
 
-(global-set-key (kbd "<M-up>") 'evil-window-up)
-(global-set-key (kbd "<M-down>") 'evil-window-down)
-(global-set-key (kbd "<M-left>") 'evil-window-left)
-(global-set-key (kbd "<M-right>") 'evil-window-right)
-
-;;(global-set-key (kbd "<C-\">") 'evil-window-split)
-;;(global-set-key (kbd "<C-%>") 'evil-window-vsplit)
-;;(global-set-key (kbd "<C-'>") 'evil-window-split)
-;;(global-set-key (kbd "<C-5>") 'evil-window-vsplit)
-
-(global-set-key (kbd "<C-S-down>") 'evil-window-split)
-(global-set-key (kbd "<C-S-right>") 'evil-window-vsplit)
-
+;;
+;; editing maps
+;;
 (global-set-key (kbd "<C-left>") 'beginning-of-line)
 (global-set-key (kbd "<C-right>") 'end-of-line)
 
@@ -147,7 +175,14 @@
 (setq prelude-guru nil)
 (setq shift-selection-mode t)
 
+(delete-selection-mode t)
+(cua-mode +1)
+(setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
 
+;; https://www.emacswiki.org/emacs/CopyAndPaste
+;;(global-set-key (kbd "<C-v>") 'evil-paste-after)
+
+;; copy and paste into insert mode with above shift-select, find, find in folder, save, better mode indicator, list buffers
 
 ;; (global-set-key (kbd "C-c +") #'evil-window-increase-height)
 
@@ -159,14 +194,38 @@
     (set-buffer-major-mode buffer)
     (display-buffer buffer '(display-buffer-pop-up-frame . nil))))
 
-;;(global-set-key (kbd "C-c n") #'lunaryorn-new-buffer-frame)
 
-;; https://www.emacswiki.org/emacs/NeoTree
-(global-set-key [f1] 'neotree-toggle)
-(global-set-key [f11] 'neotree)
+(defun jaxdad-generate-new-buffer ()
+	"generates a new 'untitled' buffer"
+	(interactive)
+	(generate-new-buffer "untitled")
+)
+
+
+;;(global-set-key (kbd "<C-n>") #'jaxdad-generate-new-buffer)
 
 ;;
-(global-set-key [f2] '+eshell/toggle)
-(global-set-key [f12] '+eshell)
+;; application maps
+;;
 
+;; https://www.emacswiki.org/emacs/NeoTree
+;; https://emacs.stackexchange.com/questions/37678/neotree-window-not-resizable
+(global-set-key [f9] 'neotree-toggle)
+;; make neotree toggle a little better
+(setq neo-window-fixed-size nil)
+;; Set the neo-window-width to the current width of the
+  ;; neotree window, to trick neotree into resetting the
+  ;; width back to the actual window width.
+  ;; Fixes: https://github.com/jaypei/emacs-neotree/issues/262
+  (eval-after-load "neotree"
+    '(add-to-list 'window-size-change-functions
+                  (lambda (frame)
+                    (let ((neo-window (neo-global--get-window)))
+                      (unless (null neo-window)
+                        (setq neo-window-width (window-width neo-window)))))))
+
+;;
+(global-set-key [f10] '+eshell/toggle)
+(global-set-key [f11] '+eshell)
+(global-set-key [f12] 'ansi-term)
 
