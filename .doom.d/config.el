@@ -179,18 +179,13 @@
 (cua-mode +1)
 (setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
 
+;; windows like copy/paste/cut/undo/redo
+;; https://emacs.stackexchange.com/questions/24496/integrate-cua-mode-with-evil-insert-state
 (define-key evil-insert-state-map (kbd "C-c") 'cua-copy-region)
 (define-key evil-insert-state-map (kbd "C-v") 'cua-paste)
 (define-key evil-insert-state-map (kbd "C-x") 'cua-cut-region)
 (define-key evil-insert-state-map (kbd "C-z") 'undo-tree-undo)
 (define-key evil-insert-state-map (kbd "C-y") 'undo-tree-redo)
-
-;; https://www.emacswiki.org/emacs/CopyAndPaste
-;;(global-set-key (kbd "<C-v>") 'evil-paste-after)
-
-;; copy and paste into insert mode with above shift-select, find, find in folder, save, better mode indicator, list buffers
-
-;; (global-set-key (kbd "C-c +") #'evil-window-increase-height)
 
 ;; https://stackoverflow.com/questions/25791605/emacs-how-do-i-create-a-new-empty-buffer-whenever-creating-a-new-frame
 (defun lunaryorn-new-buffer-frame ()
@@ -200,13 +195,11 @@
     (set-buffer-major-mode buffer)
     (display-buffer buffer '(display-buffer-pop-up-frame . nil))))
 
-
 (defun jaxdad-generate-new-buffer ()
 	"generates a new 'untitled' buffer"
 	(interactive)
 	(generate-new-buffer "untitled")
 )
-
 
 ;;(global-set-key (kbd "<C-n>") #'jaxdad-generate-new-buffer)
 
