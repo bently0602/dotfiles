@@ -179,6 +179,12 @@
 (cua-mode +1)
 (setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
 
+(define-key evil-insert-state-map (kbd "C-c") 'cua-copy-region)
+(define-key evil-insert-state-map (kbd "C-v") 'cua-paste)
+(define-key evil-insert-state-map (kbd "C-x") 'cua-cut-region)
+(define-key evil-insert-state-map (kbd "C-z") 'undo-tree-undo)
+(define-key evil-insert-state-map (kbd "C-y") 'undo-tree-redo)
+
 ;; https://www.emacswiki.org/emacs/CopyAndPaste
 ;;(global-set-key (kbd "<C-v>") 'evil-paste-after)
 
