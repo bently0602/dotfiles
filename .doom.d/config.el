@@ -166,7 +166,6 @@
 (global-set-key (kbd "<C-right>") 'end-of-line)
 
 ;;(global-set-key (kbd "<C-n>") 'evil-buffer-new)
-
 ;; # https://stackoverflow.com/questions/24720593/setting-shiftarrow-keys-to-select-text-in-emacs-prelude
 (global-unset-key (vector (list 'shift 'left)))
 (global-unset-key (vector (list 'shift 'right)))
