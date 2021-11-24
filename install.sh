@@ -6,4 +6,4 @@ rm -f ~/.tmux.conf
 curl -o ~/.tmux.conf https://raw.githubusercontent.com/bently0602/dotfiles/main/tmux.conf
 
 rm -f ~/.vimrc
-curl -o ~/.vimrc https://raw.githubusercontent.com/bently0602/dotfiles/main/.vimrc
+curl -o ~/.vimrc https://raw.githubusercontent.com/bently0602/dotfiles/main/vimrc
