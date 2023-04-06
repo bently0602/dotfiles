@@ -5,7 +5,7 @@ rm ./install.sh
 `
 
 `
-wget https://github.com/bently0602/dotfiles/blob/main/install.sh
+wget https://raw.githubusercontent.com/bently0602/dotfiles/main/install.sh
 `
 
 `
