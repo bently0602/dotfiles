@@ -1,5 +1,5 @@
 # dotfiles
 
 ```
-curl -sf -L https://dotfiles.umpecca.com | sudo sh
+curl -sf -L http://dotfiles.umpecca.com | sh
 ```
