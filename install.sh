@@ -12,4 +12,4 @@ rm -f ~/.bashrc
 curl -s -o ~/.bashrc https://raw.githubusercontent.com/bently0602/dotfiles/main/bashrc
 
 tmux source-file ~/.tmux.conf
-source ~/.bashrc
+. ~/.bashrc
